@@ -95,7 +95,7 @@ namespace SoundPlayerConsoleApp
                 {
                     var pixel = bitmap.GetPixel(i, j);
 
-                    if (pixel.IsEmpty)
+                    if (pixel.A == 0)
                     {
                         break;
                     }

@@ -17,22 +17,26 @@ namespace SoundPlayerConsoleApp
     {
         public static void Main()
         {
-            // ------- READ FROM MIDI FILE --------- 
-            string midiPath = Path.Combine("midi/", "MiiChannel.mid");
-            var midiFile = MidiFile.Read(midiPath);
-            Console.WriteLine(midiFile.GetDuration<MetricTimeSpan>().Minutes + " " + midiFile.GetDuration<MetricTimeSpan>().Seconds);
 
-            string bmpPath = Path.Combine("images/", "mii.bmp");
-            var bitmap = midiFile.ToBitmap();
-            bitmap.Save(bmpPath);
+
+            //// ------- READ FROM MIDI FILE --------- 
+            //string midiPath = Path.Combine("midi/", "queen.mid");
+            //var midiFile = MidiFile.Read(midiPath);
+            //Console.WriteLine(midiFile.GetDuration<MetricTimeSpan>().Minutes + " " + midiFile.GetDuration<MetricTimeSpan>().Seconds);
+
+            //string bmpPath = Path.Combine("images/", "queen.bmp");
+            //var bitmap = midiFile.ToBitmap();
+            //bitmap.Save(bmpPath);
 
 
             // ------- READ FROM BMP FILE ----------
-            string bmpPathRead = Path.Combine("images/", "mii.bmp");
+            string bmpPathRead = Path.Combine("images/", "donut.png");
             var newBitmap = new Bitmap(bmpPathRead);
-            var length = new TimeSpan(0, 1, 30);
+            var length = new TimeSpan(0, 1, 0);
             var newMidi = newBitmap.ToMidiFile(length);
-            
+
+            TestColorConverter testColorConverter = new();
+            //testColorConverter.TestMidiComparison(midiFile, newMidi);
 
             Console.WriteLine($"{newMidi.GetDuration<MetricTimeSpan>().Minutes} minute {newMidi.GetDuration<MetricTimeSpan>().Seconds} seconds");
             using (var outputDevice = OutputDevice.GetAll().FirstOrDefault())
@@ -45,7 +49,6 @@ namespace SoundPlayerConsoleApp
             Console.WriteLine("Song Finished");
             Console.ReadLine();
         }       
-
 
     }
 
